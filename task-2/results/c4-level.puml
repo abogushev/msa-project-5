@@ -1,0 +1,33 @@
+@startuml Контекстная диаграмма системы генерации прайс-листов
+
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 12
+skinparam roundcorner 15
+skinparam classBackgroundColor #FFFFFF
+skinparam classBorderColor #000000
+skinparam databaseBackgroundColor #F0F8FF
+skinparam actorBackgroundColor #FFFACD
+
+title Контекстная диаграмма: Система генерации прайс-листов
+
+component "Система генерации прайс-листов\n(Spring Batch + K8s CronJob)" as PriceSystem #e1f5fe
+
+database "PostgreSQL Database" as DB #f3e5f5
+database "Cloud Storage (S3)" as Storage #fff3e0
+
+actor "Администратор" as Admin #FFFACD
+component "B2B-система клиента" as ClientSystem #F5F5F5
+component "Email Service" as EmailService #F5F5F5
+component "Monitoring System\n(Prometheus/Grafana)" as Monitoring #F5F5F5
+component "Logging System\n(ELK)" as Logging #F5F5F5
+
+' Connections
+PriceSystem --> DB : "Чтение данных"
+PriceSystem --> Storage : "Запись файлов\n(CSV/XLS)"
+Admin --> PriceSystem : "Управление через\nUI/API"
+ClientSystem --> Storage : "Забирает файлы\n(HTTP/SFTP)"
+PriceSystem --> EmailService : "Отправка уведомлений"
+PriceSystem --> Monitoring : "Отправка метрик"
+PriceSystem --> Logging : "Логирование"
+
+@enduml
