@@ -1,0 +1,240 @@
+2025-09-14T09:57:51.135136734Z
+2025-09-14T09:57:51.135171692Z   .   ____          _            __ _ _
+2025-09-14T09:57:51.135173609Z  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2025-09-14T09:57:51.135174692Z ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2025-09-14T09:57:51.135175651Z  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2025-09-14T09:57:51.135176442Z   '  |____| .__|_| |_|_| |_\__, | / / / /
+2025-09-14T09:57:51.135177276Z  =========|_|==============|___/=/_/_/_/
+2025-09-14T09:57:51.135178067Z
+2025-09-14T09:57:51.135729694Z  :: Spring Boot ::                (v3.5.3)
+2025-09-14T09:57:51.135747110Z
+2025-09-14T09:57:51.163862060Z 2025-09-14T09:57:51.162Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : Starting BatchProcessingApplication v0.0.1-SNAPSHOT using Java 24 with PID 1 (/app.jar started by root in /)
+2025-09-14T09:57:51.163874560Z 2025-09-14T09:57:51.163Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-09-14T09:57:51.447615274Z 2025-09-14T09:57:51.447Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-14T09:57:51.556172855Z 2025-09-14T09:57:51.555Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@7cb2651f
+2025-09-14T09:57:51.556761273Z 2025-09-14T09:57:51.556Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-14T09:57:51.692411676Z 2025-09-14T09:57:51.691Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : Started BatchProcessingApplication in 0.703 seconds (process running for 0.893)
+2025-09-14T09:57:51.693351346Z 2025-09-14T09:57:51.693Z  INFO 1 --- [           main] o.s.b.a.b.JobLauncherApplicationRunner   : Running default command line with: []
+2025-09-14T09:57:51.707823676Z 2025-09-14T09:57:51.707Z  INFO 1 --- [           main] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=importProductJob]] launched with the following parameters: [{}]
+2025-09-14T09:57:51.717431368Z 2025-09-14T09:57:51.717Z  INFO 1 --- [           main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [step1]
+2025-09-14T09:57:51.731498031Z 2025-09-14T09:57:51.729Z ERROR 1 --- [           main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step step1 in job importProductJob
+2025-09-14T09:57:51.731511281Z
+2025-09-14T09:57:51.731512364Z org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT * FROM loyality_data WHERE productSku=20001]
+2025-09-14T09:57:51.731513531Z 	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:112) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731514947Z 	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731515989Z 	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:116) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731524364Z 	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1556) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731525489Z 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731526489Z 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731527364Z 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731528239Z 	at com.example.batchprocessing.ProductItemProcessor.process(ProductItemProcessor.java:33) ~[!/:0.0.1-SNAPSHOT]
+2025-09-14T09:57:51.731529156Z 	at com.example.batchprocessing.ProductItemProcessor.process(ProductItemProcessor.java:14) ~[!/:0.0.1-SNAPSHOT]
+2025-09-14T09:57:51.731530031Z 	at org.springframework.batch.core.step.item.SimpleChunkProcessor.doProcess(SimpleChunkProcessor.java:146) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731531031Z 	at org.springframework.batch.core.step.item.SimpleChunkProcessor.transform(SimpleChunkProcessor.java:322) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731532031Z 	at org.springframework.batch.core.step.item.SimpleChunkProcessor.process(SimpleChunkProcessor.java:220) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731532947Z 	at org.springframework.batch.core.step.item.ChunkOrientedTasklet.execute(ChunkOrientedTasklet.java:75) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731534364Z 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:383) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731535364Z 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:307) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731536322Z 	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140) ~[spring-tx-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731537656Z 	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:250) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731538906Z 	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:82) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731539864Z 	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:369) ~[spring-batch-infrastructure-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731540864Z 	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:206) ~[spring-batch-infrastructure-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731541822Z 	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:140) ~[spring-batch-infrastructure-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731542739Z 	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:235) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731558906Z 	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:230) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731559947Z 	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:153) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731560864Z 	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:408) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731561822Z 	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:127) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731562697Z 	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:307) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731563864Z 	at org.springframework.batch.core.launch.support.TaskExecutorJobLauncher$1.run(TaskExecutorJobLauncher.java:155) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731564864Z 	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731565739Z 	at org.springframework.batch.core.launch.support.TaskExecutorJobLauncher.run(TaskExecutorJobLauncher.java:146) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:57:51.731566697Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.execute(JobLauncherApplicationRunner.java:210) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731567697Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.executeLocalJobs(JobLauncherApplicationRunner.java:194) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731568697Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.launchJobFromProperties(JobLauncherApplicationRunner.java:174) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731569739Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:169) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731570656Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:164) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731571614Z 	at org.springframework.boot.SpringApplication.lambda$callRunner$4(SpringApplication.java:784) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731572489Z 	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731587489Z 	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731589197Z 	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731590114Z 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731590989Z 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:784) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731593572Z 	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731594489Z 	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186) ~[na:na]
+2025-09-14T09:57:51.731595406Z 	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357) ~[na:na]
+2025-09-14T09:57:51.731596239Z 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:571) ~[na:na]
+2025-09-14T09:57:51.731597072Z 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560) ~[na:na]
+2025-09-14T09:57:51.731597947Z 	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153) ~[na:na]
+2025-09-14T09:57:51.731598781Z 	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176) ~[na:na]
+2025-09-14T09:57:51.731599697Z 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265) ~[na:na]
+2025-09-14T09:57:51.731600531Z 	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636) ~[na:na]
+2025-09-14T09:57:51.731601364Z 	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731602406Z 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731603281Z 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731604156Z 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:57:51.731605281Z 	at com.example.batchprocessing.BatchProcessingApplication.main(BatchProcessingApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+2025-09-14T09:57:51.731830698Z 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+2025-09-14T09:57:51.731833948Z 	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+2025-09-14T09:57:51.731834865Z 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:102) ~[app.jar:0.0.1-SNAPSHOT]
+2025-09-14T09:57:51.731835781Z 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+2025-09-14T09:57:51.731836698Z 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+2025-09-14T09:57:51.731837573Z Caused by: org.postgresql.util.PSQLException: ERROR: relation "loyality_data" does not exist
+2025-09-14T09:57:51.731838531Z   Position: 15
+2025-09-14T09:57:51.731839698Z 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731840573Z 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731843156Z 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731844073Z 	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731844948Z 	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731845823Z 	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:307) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731846698Z 	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:293) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731847573Z 	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:270) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731848406Z 	at org.postgresql.jdbc.PgStatement.executeQuery(PgStatement.java:224) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:57:51.731849448Z 	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:111) ~[HikariCP-6.3.0.jar!/:na]
+2025-09-14T09:57:51.731850323Z 	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-6.3.0.jar!/:na]
+2025-09-14T09:57:51.731851240Z 	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731852198Z 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:57:51.731853115Z 	... 55 common frames omitted
+2025-09-14T09:57:51.731853865Z
+2025-09-14T09:57:51.731922740Z 2025-09-14T09:57:51.731Z  INFO 1 --- [           main] o.s.batch.core.step.AbstractStep         : Step: [step1] executed in 14ms
+2025-09-14T09:57:51.735853959Z 2025-09-14T09:57:51.735Z  INFO 1 --- [           main] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=importProductJob]] completed with the following parameters: [{}] and the following status: [FAILED] in 23ms
+2025-09-14T09:57:51.738214507Z 2025-09-14T09:57:51.738Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-14T09:57:51.740764222Z 2025-09-14T09:57:51.740Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-14T09:59:10.810553844Z
+2025-09-14T09:59:10.810580177Z   .   ____          _            __ _ _
+2025-09-14T09:59:10.810581802Z  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2025-09-14T09:59:10.810583094Z ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2025-09-14T09:59:10.810584219Z  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2025-09-14T09:59:10.810585260Z   '  |____| .__|_| |_|_| |_\__, | / / / /
+2025-09-14T09:59:10.810586594Z  =========|_|==============|___/=/_/_/_/
+2025-09-14T09:59:10.810587552Z
+2025-09-14T09:59:10.811035637Z  :: Spring Boot ::                (v3.5.3)
+2025-09-14T09:59:10.811053887Z
+2025-09-14T09:59:10.839767353Z 2025-09-14T09:59:10.838Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : Starting BatchProcessingApplication v0.0.1-SNAPSHOT using Java 24 with PID 1 (/app.jar started by root in /)
+2025-09-14T09:59:10.841026440Z 2025-09-14T09:59:10.840Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-09-14T09:59:11.129415019Z 2025-09-14T09:59:11.128Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-14T09:59:11.237175985Z 2025-09-14T09:59:11.236Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4b54af3d
+2025-09-14T09:59:11.238739782Z 2025-09-14T09:59:11.237Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-14T09:59:11.384371868Z 2025-09-14T09:59:11.384Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : Started BatchProcessingApplication in 0.734 seconds (process running for 0.931)
+2025-09-14T09:59:11.386268833Z 2025-09-14T09:59:11.386Z  INFO 1 --- [           main] o.s.b.a.b.JobLauncherApplicationRunner   : Running default command line with: []
+2025-09-14T09:59:11.409451989Z 2025-09-14T09:59:11.409Z  INFO 1 --- [           main] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=importProductJob]] launched with the following parameters: [{}]
+2025-09-14T09:59:11.421623611Z 2025-09-14T09:59:11.421Z  INFO 1 --- [           main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [step1]
+2025-09-14T09:59:11.435173654Z 2025-09-14T09:59:11.433Z ERROR 1 --- [           main] o.s.batch.core.step.AbstractStep         : Encountered an error executing step step1 in job importProductJob
+2025-09-14T09:59:11.435180654Z
+2025-09-14T09:59:11.435181654Z org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad SQL grammar [SELECT * FROM loyality_data WHERE productSku=20001]
+2025-09-14T09:59:11.435182696Z 	at org.springframework.jdbc.support.SQLStateSQLExceptionTranslator.doTranslate(SQLStateSQLExceptionTranslator.java:112) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435183863Z 	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:107) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435184821Z 	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:116) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435185738Z 	at org.springframework.jdbc.core.JdbcTemplate.translateException(JdbcTemplate.java:1556) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435186946Z 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:408) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435187779Z 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:476) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435188613Z 	at org.springframework.jdbc.core.JdbcTemplate.query(JdbcTemplate.java:486) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435197113Z 	at com.example.batchprocessing.ProductItemProcessor.process(ProductItemProcessor.java:33) ~[!/:0.0.1-SNAPSHOT]
+2025-09-14T09:59:11.435198113Z 	at com.example.batchprocessing.ProductItemProcessor.process(ProductItemProcessor.java:14) ~[!/:0.0.1-SNAPSHOT]
+2025-09-14T09:59:11.435198946Z 	at org.springframework.batch.core.step.item.SimpleChunkProcessor.doProcess(SimpleChunkProcessor.java:146) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435199863Z 	at org.springframework.batch.core.step.item.SimpleChunkProcessor.transform(SimpleChunkProcessor.java:322) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435200779Z 	at org.springframework.batch.core.step.item.SimpleChunkProcessor.process(SimpleChunkProcessor.java:220) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435201696Z 	at org.springframework.batch.core.step.item.ChunkOrientedTasklet.execute(ChunkOrientedTasklet.java:75) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435202821Z 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:383) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435203779Z 	at org.springframework.batch.core.step.tasklet.TaskletStep$ChunkTransactionCallback.doInTransaction(TaskletStep.java:307) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435204738Z 	at org.springframework.transaction.support.TransactionTemplate.execute(TransactionTemplate.java:140) ~[spring-tx-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435205571Z 	at org.springframework.batch.core.step.tasklet.TaskletStep$2.doInChunkContext(TaskletStep.java:250) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435206446Z 	at org.springframework.batch.core.scope.context.StepContextRepeatCallback.doInIteration(StepContextRepeatCallback.java:82) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435207363Z 	at org.springframework.batch.repeat.support.RepeatTemplate.getNextResult(RepeatTemplate.java:369) ~[spring-batch-infrastructure-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435208238Z 	at org.springframework.batch.repeat.support.RepeatTemplate.executeInternal(RepeatTemplate.java:206) ~[spring-batch-infrastructure-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435209113Z 	at org.springframework.batch.repeat.support.RepeatTemplate.iterate(RepeatTemplate.java:140) ~[spring-batch-infrastructure-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435209988Z 	at org.springframework.batch.core.step.tasklet.TaskletStep.doExecute(TaskletStep.java:235) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435210863Z 	at org.springframework.batch.core.step.AbstractStep.execute(AbstractStep.java:230) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435211738Z 	at org.springframework.batch.core.job.SimpleStepHandler.handleStep(SimpleStepHandler.java:153) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435212613Z 	at org.springframework.batch.core.job.AbstractJob.handleStep(AbstractJob.java:408) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435213446Z 	at org.springframework.batch.core.job.SimpleJob.doExecute(SimpleJob.java:127) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435215404Z 	at org.springframework.batch.core.job.AbstractJob.execute(AbstractJob.java:307) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435216488Z 	at org.springframework.batch.core.launch.support.TaskExecutorJobLauncher$1.run(TaskExecutorJobLauncher.java:155) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435217404Z 	at org.springframework.core.task.SyncTaskExecutor.execute(SyncTaskExecutor.java:50) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435218238Z 	at org.springframework.batch.core.launch.support.TaskExecutorJobLauncher.run(TaskExecutorJobLauncher.java:146) ~[spring-batch-core-5.2.2.jar!/:5.2.2]
+2025-09-14T09:59:11.435219113Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.execute(JobLauncherApplicationRunner.java:210) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435220071Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.executeLocalJobs(JobLauncherApplicationRunner.java:194) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435221029Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.launchJobFromProperties(JobLauncherApplicationRunner.java:174) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435222154Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:169) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435223196Z 	at org.springframework.boot.autoconfigure.batch.JobLauncherApplicationRunner.run(JobLauncherApplicationRunner.java:164) ~[spring-boot-autoconfigure-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435224071Z 	at org.springframework.boot.SpringApplication.lambda$callRunner$4(SpringApplication.java:784) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435224946Z 	at org.springframework.util.function.ThrowingConsumer$1.acceptWithException(ThrowingConsumer.java:82) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435225946Z 	at org.springframework.util.function.ThrowingConsumer.accept(ThrowingConsumer.java:60) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435226779Z 	at org.springframework.util.function.ThrowingConsumer$1.accept(ThrowingConsumer.java:86) ~[spring-core-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435227613Z 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:796) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435228446Z 	at org.springframework.boot.SpringApplication.callRunner(SpringApplication.java:784) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435229404Z 	at org.springframework.boot.SpringApplication.lambda$callRunners$3(SpringApplication.java:772) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435230279Z 	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:186) ~[na:na]
+2025-09-14T09:59:11.435231113Z 	at java.base/java.util.stream.SortedOps$SizedRefSortingSink.end(SortedOps.java:357) ~[na:na]
+2025-09-14T09:59:11.435231904Z 	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:571) ~[na:na]
+2025-09-14T09:59:11.435232738Z 	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:560) ~[na:na]
+2025-09-14T09:59:11.435234613Z 	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:153) ~[na:na]
+2025-09-14T09:59:11.435235529Z 	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:176) ~[na:na]
+2025-09-14T09:59:11.435236363Z 	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:265) ~[na:na]
+2025-09-14T09:59:11.435237196Z 	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:636) ~[na:na]
+2025-09-14T09:59:11.435238029Z 	at org.springframework.boot.SpringApplication.callRunners(SpringApplication.java:772) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435238863Z 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:325) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435239946Z 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1361) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435240779Z 	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1350) ~[spring-boot-3.5.3.jar!/:3.5.3]
+2025-09-14T09:59:11.435241571Z 	at com.example.batchprocessing.BatchProcessingApplication.main(BatchProcessingApplication.java:10) ~[!/:0.0.1-SNAPSHOT]
+2025-09-14T09:59:11.435242446Z 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+2025-09-14T09:59:11.435243321Z 	at java.base/java.lang.reflect.Method.invoke(Method.java:565) ~[na:na]
+2025-09-14T09:59:11.435244113Z 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:102) ~[app.jar:0.0.1-SNAPSHOT]
+2025-09-14T09:59:11.435244946Z 	at org.springframework.boot.loader.launch.Launcher.launch(Launcher.java:64) ~[app.jar:0.0.1-SNAPSHOT]
+2025-09-14T09:59:11.435245738Z 	at org.springframework.boot.loader.launch.JarLauncher.main(JarLauncher.java:40) ~[app.jar:0.0.1-SNAPSHOT]
+2025-09-14T09:59:11.435246613Z Caused by: org.postgresql.util.PSQLException: ERROR: relation "loyality_data" does not exist
+2025-09-14T09:59:11.435247529Z   Position: 15
+2025-09-14T09:59:11.435248363Z 	at org.postgresql.core.v3.QueryExecutorImpl.receiveErrorResponse(QueryExecutorImpl.java:2440) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435249238Z 	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2183) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435250071Z 	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:308) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435250904Z 	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:441) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435251696Z 	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:365) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435252529Z 	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:307) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435253363Z 	at org.postgresql.jdbc.PgStatement.executeCachedSql(PgStatement.java:293) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435255154Z 	at org.postgresql.jdbc.PgStatement.executeWithFlags(PgStatement.java:270) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435256029Z 	at org.postgresql.jdbc.PgStatement.executeQuery(PgStatement.java:224) ~[postgresql-42.2.5.jar!/:42.2.5]
+2025-09-14T09:59:11.435256863Z 	at com.zaxxer.hikari.pool.ProxyStatement.executeQuery(ProxyStatement.java:111) ~[HikariCP-6.3.0.jar!/:na]
+2025-09-14T09:59:11.435257654Z 	at com.zaxxer.hikari.pool.HikariProxyStatement.executeQuery(HikariProxyStatement.java) ~[HikariCP-6.3.0.jar!/:na]
+2025-09-14T09:59:11.435258488Z 	at org.springframework.jdbc.core.JdbcTemplate$1QueryStatementCallback.doInStatement(JdbcTemplate.java:463) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435259363Z 	at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:393) ~[spring-jdbc-6.2.8.jar!/:6.2.8]
+2025-09-14T09:59:11.435260196Z 	... 55 common frames omitted
+2025-09-14T09:59:11.435260946Z
+2025-09-14T09:59:11.435451905Z 2025-09-14T09:59:11.435Z  INFO 1 --- [           main] o.s.batch.core.step.AbstractStep         : Step: [step1] executed in 13ms
+2025-09-14T09:59:11.439975294Z 2025-09-14T09:59:11.439Z  INFO 1 --- [           main] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=importProductJob]] completed with the following parameters: [{}] and the following status: [FAILED] in 25ms
+2025-09-14T09:59:11.442390344Z 2025-09-14T09:59:11.442Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-14T09:59:11.446630190Z 2025-09-14T09:59:11.446Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-09-14T10:01:18.494238427Z
+2025-09-14T10:01:18.494270136Z   .   ____          _            __ _ _
+2025-09-14T10:01:18.494272927Z  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+2025-09-14T10:01:18.494274719Z ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+2025-09-14T10:01:18.494276219Z  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+2025-09-14T10:01:18.494278177Z   '  |____| .__|_| |_|_| |_\__, | / / / /
+2025-09-14T10:01:18.494279427Z  =========|_|==============|___/=/_/_/_/
+2025-09-14T10:01:18.494280594Z
+2025-09-14T10:01:18.494806554Z  :: Spring Boot ::                (v3.5.3)
+2025-09-14T10:01:18.494817221Z
+2025-09-14T10:01:18.524837207Z 2025-09-14T10:01:18.523Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : Starting BatchProcessingApplication v0.0.1-SNAPSHOT using Java 24 with PID 1 (/app.jar started by root in /)
+2025-09-14T10:01:18.525261500Z 2025-09-14T10:01:18.525Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : No active profile set, falling back to 1 default profile: "default"
+2025-09-14T10:01:18.849635660Z 2025-09-14T10:01:18.848Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-09-14T10:01:18.983788699Z 2025-09-14T10:01:18.982Z  INFO 1 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@2c6ee758
+2025-09-14T10:01:18.983861657Z 2025-09-14T10:01:18.983Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-09-14T10:01:19.129480780Z 2025-09-14T10:01:19.129Z  INFO 1 --- [           main] c.e.b.BatchProcessingApplication         : Started BatchProcessingApplication in 0.795 seconds (process running for 1.005)
+2025-09-14T10:01:19.130680785Z 2025-09-14T10:01:19.130Z  INFO 1 --- [           main] o.s.b.a.b.JobLauncherApplicationRunner   : Running default command line with: []
+2025-09-14T10:01:19.157268050Z 2025-09-14T10:01:19.157Z  INFO 1 --- [           main] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=importProductJob]] launched with the following parameters: [{}]
+2025-09-14T10:01:19.170399974Z 2025-09-14T10:01:19.170Z  INFO 1 --- [           main] o.s.batch.core.job.SimpleStepHandler     : Executing step: [step1]
+2025-09-14T10:01:19.179727175Z 2025-09-14T10:01:19.178Z  INFO 1 --- [           main] c.e.b.ProductItemProcessor               : Transforming (Product[productId=1, productSku=20001, productName=hammer, productAmount=45, productData=Loyality_off]) into (Product[productId=1, productSku=20001, productName=hammer, productAmount=45, productData=Loyality_off])
+2025-09-14T10:01:19.180092718Z 2025-09-14T10:01:19.179Z  INFO 1 --- [           main] c.e.b.ProductItemProcessor               : Transforming (Product[productId=2, productSku=30001, productName=sink, productAmount=20, productData=Loyality_off]) into (Product[productId=2, productSku=30001, productName=sink, productAmount=20, productData=Loyality_off])
+2025-09-14T10:01:19.180577761Z 2025-09-14T10:01:19.180Z  INFO 1 --- [           main] c.e.b.ProductItemProcessor               : Transforming (Product[productId=3, productSku=40001, productName=roof_shell, productAmount=256, productData=Loyality_on]) into (Product[productId=3, productSku=40001, productName=roof_shell, productAmount=256, productData=Loyality_on])
+2025-09-14T10:01:19.186435950Z 2025-09-14T10:01:19.186Z  INFO 1 --- [           main] c.e.b.ProductItemProcessor               : Transforming (Product[productId=4, productSku=50001, productName=priming, productAmount=67, productData=Loyality_off]) into (Product[productId=4, productSku=50001, productName=priming, productAmount=67, productData=Loyality_off])
+2025-09-14T10:01:19.186755451Z 2025-09-14T10:01:19.186Z  INFO 1 --- [           main] c.e.b.ProductItemProcessor               : Transforming (Product[productId=5, productSku=60001, productName=clapboard, productAmount=120, productData=Loyality_on]) into (Product[productId=5, productSku=60001, productName=clapboard, productAmount=120, productData=Loyality_on])
+2025-09-14T10:01:19.188803792Z 2025-09-14T10:01:19.188Z  INFO 1 --- [           main] o.s.batch.core.step.AbstractStep         : Step: [step1] executed in 18ms
+2025-09-14T10:01:19.191290510Z 2025-09-14T10:01:19.191Z  INFO 1 --- [           main] c.e.b.JobCompletionNotificationListener  : !!! JOB FINISHED! Time to verify the results
+2025-09-14T10:01:19.192325513Z 2025-09-14T10:01:19.192Z  INFO 1 --- [           main] c.e.b.JobCompletionNotificationListener  : Transformed <Product[productId=1, productSku=20001, productName=hammer, productAmount=45, productData=Loyality_off]> in the database.
+2025-09-14T10:01:19.192416055Z 2025-09-14T10:01:19.192Z  INFO 1 --- [           main] c.e.b.JobCompletionNotificationListener  : Transformed <Product[productId=2, productSku=30001, productName=sink, productAmount=20, productData=Loyality_off]> in the database.
+2025-09-14T10:01:19.192430639Z 2025-09-14T10:01:19.192Z  INFO 1 --- [           main] c.e.b.JobCompletionNotificationListener  : Transformed <Product[productId=3, productSku=40001, productName=roof_shell, productAmount=256, productData=Loyality_on]> in the database.
+2025-09-14T10:01:19.192526014Z 2025-09-14T10:01:19.192Z  INFO 1 --- [           main] c.e.b.JobCompletionNotificationListener  : Transformed <Product[productId=4, productSku=50001, productName=priming, productAmount=67, productData=Loyality_off]> in the database.
+2025-09-14T10:01:19.192572598Z 2025-09-14T10:01:19.192Z  INFO 1 --- [           main] c.e.b.JobCompletionNotificationListener  : Transformed <Product[productId=5, productSku=60001, productName=clapboard, productAmount=120, productData=Loyality_on]> in the database.
+2025-09-14T10:01:19.194546522Z 2025-09-14T10:01:19.194Z  INFO 1 --- [           main] o.s.b.c.l.s.TaskExecutorJobLauncher      : Job: [SimpleJob: [name=importProductJob]] completed with the following parameters: [{}] and the following status: [COMPLETED] in 30ms
+2025-09-14T10:01:19.198519161Z 2025-09-14T10:01:19.196Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-09-14T10:01:19.227540269Z 2025-09-14T10:01:19.227Z  INFO 1 --- [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
