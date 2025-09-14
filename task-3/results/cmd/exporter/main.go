@@ -22,13 +22,15 @@ type Config struct {
 
 func main() {
 	config := Config{
-		DBHost:     getEnv("DB_HOST", "localhost"),
+		DBHost:     getEnv("DB_HOST", "postgres-service"),
 		DBPort:     getEnv("DB_PORT", "5432"),
 		DBName:     getEnv("DB_NAME", "transport_db"),
 		DBUser:     getEnv("DB_USER", "postgres"),
-		DBPassword: getEnv("DB_PASSWORD", ""),
+		DBPassword: getEnv("DB_PASSWORD", "secure_password_123"),
 		ExportPath: getEnv("EXPORT_PATH", "/data/exports"),
 	}
+
+	log.Printf("Connecting to database: %s:%s", config.DBHost, config.DBPort)
 
 	if err := exportShipments(config); err != nil {
 		log.Fatalf("Export failed: %v", err)
@@ -38,7 +40,7 @@ func main() {
 }
 
 func exportShipments(config Config) error {
-	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable connect_timeout=30",
 		config.DBHost, config.DBPort, config.DBUser, config.DBPassword, config.DBName)
 
 	db, err := sql.Open("postgres", connStr)
@@ -51,12 +53,13 @@ func exportShipments(config Config) error {
 		return fmt.Errorf("failed to ping database: %v", err)
 	}
 
+	log.Println("Successfully connected to database")
+
+	// Выполняем экспорт данных
 	query := `
 		SELECT id, client_id, driver_id, vehicle_id, origin, destination, 
 			   status, weight_kg, volume_m3, created_at, updated_at
-		FROM shipments 
-		WHERE DATE(created_at) = CURRENT_DATE - INTERVAL '1 day'
-	`
+		FROM shipments`
 
 	rows, err := db.Query(query)
 	if err != nil {
@@ -114,6 +117,7 @@ func exportShipments(config Config) error {
 			createdAt.Format(time.RFC3339),
 			updatedAt.Format(time.RFC3339),
 		}
+		fmt.Printf("RECORD:%s\n", record)
 
 		if err := writer.Write(record); err != nil {
 			return fmt.Errorf("failed to write record: %v", err)
@@ -127,6 +131,10 @@ func exportShipments(config Config) error {
 	}
 
 	log.Printf("Exported %d shipment records to %s", count, filename)
+
+	// for test result
+	//time.Sleep(60 * time.Second)
+
 	return nil
 }
 
