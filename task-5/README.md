@@ -1,5 +1,5 @@
 **Подсказки по подготовке окружения**
-
+export JAVA_HOME="/opt/homebrew/opt/openjdk@17/libexec/openjdk.jdk/Contents/Home"
 1. Установите Docker и Docker Compose
 2. Для удобства просмотра кода может понадобиться:
 
