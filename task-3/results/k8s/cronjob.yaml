@@ -4,7 +4,7 @@ metadata:
   name: data-exporter
   namespace: data-export
 spec:
-  schedule: "0 0 * * *"
+  schedule: "* * * * *"
   concurrencyPolicy: Forbid
   successfulJobsHistoryLimit: 3
   failedJobsHistoryLimit: 3
