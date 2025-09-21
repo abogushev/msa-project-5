@@ -2,14 +2,17 @@ filebeat.inputs:
   - type: log
     enabled: true
     paths:
-      - /var/log/nginx/*.json
+      - /var/log/app/*.log
     json.keys_under_root: true
-    json.overwrite_keys: false
+    json.overwrite_keys: true
     json.add_error_key: true
+    tags: ["app-logs"]
 
-
-
-
+  - type: log
+    enabled: true
+    paths:
+      - /var/log/nginx/*.json
+    tags: ["nginx-logs"]
 
 output.logstash:
   enabled: true
@@ -17,3 +20,9 @@ output.logstash:
 
 setup.kibana:
   host: "http://kibana:5601"
+
+# Отключаем запись логов Filebeat в файл, используем только stdout
+logging.level: info
+logging.to_files: false
+logging.to_syslog: false
+logging.metrics.enabled: false

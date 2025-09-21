@@ -2,6 +2,66 @@
 <configuration>
     <property resource="application.properties"/>
     <contextName>${spring.application.name}</contextName>
+
+    <!-- Файловый аппендер для записи логов в JSON формате -->
+    <appender name="FILE_JSON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/var/log/app/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>/var/log/app/app.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>10MB</maxFileSize>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "trace": "%X{traceId:-}",
+                        "span": "%X{spanId:-}",
+                        "parent": "%X{parentId:-}",
+                        "exportable": "%X{sampled:-}",
+                        "pid": "${PID:-}"
+                        }
+                    </pattern>
+                </pattern>
+                <contextName>
+                    <fieldName>app</fieldName>
+                </contextName>
+                <timestamp>
+                    <fieldName>ts</fieldName>
+                    <timeZone>UTC</timeZone>
+                </timestamp>
+                <loggerName>
+                    <fieldName>logger</fieldName>
+                </loggerName>
+                <logLevel>
+                    <fieldName>level</fieldName>
+                </logLevel>
+                <callerData>
+                    <classFieldName>class</classFieldName>
+                    <methodFieldName>method</methodFieldName>
+                    <lineFieldName>line</lineFieldName>
+                    <fileFieldName>file</fileFieldName>
+                </callerData>
+                <threadName>
+                    <fieldName>thread</fieldName>
+                </threadName>
+                <mdc/>
+                <arguments>
+                    <includeNonStructuredArguments>false</includeNonStructuredArguments>
+                </arguments>
+                <stackTrace>
+                    <fieldName>stack</fieldName>
+                </stackTrace>
+                <message>
+                    <fieldName>msg</fieldName>
+                </message>
+            </providers>
+        </encoder>
+    </appender>
+
+    <!-- Консольный аппендер для JSON формата -->
     <springProfile name="!non-json-logs">
         <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
             <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
@@ -53,13 +113,25 @@
             </encoder>
         </appender>
     </springProfile>
+
+    <!-- Консольный аппендер для простого текстового формата -->
     <springProfile name="non-json-logs">
-        <include resource="org/springframework/boot/logging/logback/base.xml"/>
+        <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            </encoder>
+        </appender>
     </springProfile>
+
+    <!-- Логгер для вашего приложения -->
     <logger name="batch-processing" level="DEBUG" additivity="false">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_JSON"/>
     </logger>
-    <root level="DEBUG">
+
+    <!-- Корневой логгер -->
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE_JSON"/>
     </root>
 </configuration>

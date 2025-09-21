@@ -23,6 +23,7 @@ services:
       - ./conf/logstash/conf.yml:/usr/share/logstash/config/logstash.yml:ro
       - ./conf/logstash/pipelines.yml:/usr/share/logstash/config/pipelines.yml:ro
       - ./conf/logstash/pipelines:/usr/share/logstash/config/pipelines:ro
+      - ./conf/logstash/logstash.conf:/usr/share/logstash/pipeline/logstash.conf:ro
     environment:
       LS_JAVA_OPTS: "-Xmx512m -Xms512m"
     ports:
@@ -58,6 +59,7 @@ services:
     volumes:
       - ./conf/filebeat/conf.yml:/usr/share/filebeat/filebeat.yml:ro
       - ./var/log/nginx:/var/log/nginx
+      - app-logs:/var/log/app:ro
     networks:
       - elknet
     depends_on:
@@ -76,6 +78,8 @@ services:
       - "8080"
     ports:
       - "8080:8080"
+    volumes:
+      - app-logs:/var/log/app
     networks:
       - elknet
   postgresdb:
@@ -86,10 +90,14 @@ services:
       - POSTGRES_USER=$POSTGRESDB_USER
       - POSTGRES_PASSWORD=$POSTGRESDB_ROOT_PASSWORD
       - POSTGRES_DB=$POSTGRESDB_DATABASE
+      - SPRING_PROFILES_ACTIVE=!non-json-logs
     ports:
       - $POSTGRESDB_LOCAL_PORT:$POSTGRESDB_DOCKER_PORT
     networks:
       - elknet
+
+volumes:
+  app-logs:
 
 networks:
   elknet:
