@@ -1,0 +1,35 @@
+@startuml TradeWare Architecture with Spring Batch
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+
+Person(employee, "Сотрудник склада", "")
+
+System_Boundary(app, "TradeWare Application") {
+    Container(web_ui, "Web UI", "", "Предоставляет интерфейс для загрузки файлов и уведомляет о статусе")
+    Container(backend, "Backend", "", "Принимает файлы, запускает обработку, возвращает статус")
+
+    ContainerDb(db, "Database", "PostgreSQL хранилища", "Хранит справочники, остатки, метаданные заданий Spring Batch")
+    Container(cloud_storage, "Cloud Storage", "", "Хранит загруженные CSV-файлы")
+    Container("spring_batch", "Spring Batch", "запускает Job\nчитает csv порциями\nобогащает данные из справочников БД\nпакетно записывает обновления в БД\nобновляет статусы задач")
+    Container(monitoring, "Monitoring", "ELK/Grafana", "Визуализация метрик и логов")
+}
+Rel(employee, web_ui, "Загружает CSV файл", "")
+Rel(web_ui, backend, "Вызывает API загрузки", "")
+Rel(backend, cloud_storage, "Сохраняет файл", "")
+Rel(backend, spring_batch, "Запускает асинхронно Job для обработки файла", "")
+
+Rel(spring_batch, cloud_storage, "Читает сохраненный CSV файл", "")
+Rel(spring_batch, db, "Читает справочные данные (номенклатура, акции)", "")
+Rel(spring_batch, db, "Пакетно обновляет складские остатки", "")
+Rel(spring_batch, db, "Сохраняет статус выполнения", "")
+Rel(spring_batch, db, "Хранит метаданные в БД", "")
+
+Rel(backend, db, "Проверяет/сохраняет статус задания", "")
+Rel(web_ui, db, "Запрашивает данные для отображения (остатки, история)", "")
+
+Rel(backend, monitoring, "данные для мониторинга", "")
+Rel(spring_batch, monitoring, "данные для мониторинга", "")
+Rel(cloud_storage, monitoring, "данные для мониторинга", "")
+
+
+@enduml

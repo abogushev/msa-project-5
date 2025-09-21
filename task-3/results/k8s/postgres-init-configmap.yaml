@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+  namespace: data-export
+data:
+  init.sql: |
+    CREATE TABLE IF NOT EXISTS shipments (
+                                             id SERIAL PRIMARY KEY,
+                                             client_id INTEGER NOT NULL,
+                                             driver_id INTEGER NOT NULL,
+                                             vehicle_id INTEGER NOT NULL,
+                                             origin VARCHAR(255) NOT NULL,
+                                             destination VARCHAR(255) NOT NULL,
+                                             status VARCHAR(50) NOT NULL,
+                                             weight_kg DECIMAL(10,2) NOT NULL,
+                                             volume_m3 DECIMAL(10,2) NOT NULL,
+                                             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                                             updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    INSERT INTO shipments (client_id, driver_id, vehicle_id, origin, destination, status, weight_kg, volume_m3, created_at) VALUES
+                                                                                                                                (1, 1, 1, 'Москва', 'Санкт-Петербург', 'delivered', 1500.50, 12.5, '2024-01-15 08:00:00'),
+                                                                                                                                (2, 2, 2, 'Санкт-Петербург', 'Новосибирск', 'in_transit', 2500.75, 18.2, '2024-01-15 09:30:00'),
+                                                                                                                                (3, 3, 3, 'Екатеринбург', 'Казань', 'pending', 1800.25, 15.8, '2024-01-15 10:15:00'),
+                                                                                                                                (4, 4, 4, 'Новосибирск', 'Красноярск', 'delivered', 3200.00, 22.1, '2024-01-15 11:45:00'),
+                                                                                                                                (5, 5, 5, 'Краснодар', 'Ростов-на-Дону', 'in_transit', 1450.30, 11.9, '2024-01-15 12:30:00'),
+                                                                                                                                (6, 6, 6, 'Владивосток', 'Хабаровск', 'pending', 2800.60, 19.5, '2024-01-15 13:20:00'),
+                                                                                                                                (7, 7, 7, 'Самара', 'Уфа', 'delivered', 1950.45, 16.3, '2024-01-15 14:10:00'),
+                                                                                                                                (8, 8, 8, 'Омск', 'Томск', 'in_transit', 2300.80, 17.8, '2024-01-15 15:00:00'),
+                                                                                                                                (9, 9, 9, 'Челябинск', 'Пермь', 'pending', 1650.20, 14.2, '2024-01-15 16:30:00'),
+                                                                                                                                (10, 10, 10, 'Воронеж', 'Липецк', 'delivered', 2750.90, 20.1, '2024-01-15 17:15:00');
